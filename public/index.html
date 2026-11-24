@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>케이크 쌓기 🎂</title>
+  <meta name="description" content="움직이는 케이크 층을 딱 맞게 쌓아 올리는 캐주얼 게임" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game">
+    <canvas id="canvas" width="400" height="700"></canvas>
+
+    <!-- 점수 표시 -->
+    <div id="hud">
+      <div class="hud-box">
+        <span class="hud-label">점수</span>
+        <span id="score">0</span>
+      </div>
+      <div class="hud-box">
+        <span class="hud-label">최고</span>
+        <span id="best">0</span>
+      </div>
+      <button id="muteBtn" type="button" aria-label="소리 켜기/끄기">🔊</button>
+    </div>
+
+    <!-- 시작 화면 -->
+    <div id="menu" class="overlay">
+      <div class="panel">
+        <div class="emoji">🎂</div>
+        <h1>케이크 쌓기</h1>
+        <p>움직이는 케이크 층을<br />아래층에 딱 맞춰 떨어뜨리세요!</p>
+        <ul class="howto">
+          <li>🖱️ 클릭 · 📱 터치 · ⌨️ 스페이스바</li>
+          <li>✨ 정확히 맞추면 <b>Perfect!</b> 보너스</li>
+          <li>🔥 Perfect 3연속이면 케이크가 넓어져요</li>
+        </ul>
+        <button id="startBtn" class="btn" type="button">시작하기</button>
+      </div>
+    </div>
+
+    <!-- 게임 오버 화면 -->
+    <div id="over" class="overlay hidden">
+      <div class="panel">
+        <div class="emoji">🍒</div>
+        <h2>케이크 완성!</h2>
+        <div id="newRecord" class="badge hidden">🏆 신기록!</div>
+        <div class="result">
+          <div><span class="hud-label">점수</span><b id="finalScore">0</b></div>
+          <div><span class="hud-label">층수</span><b id="finalLayers">0</b></div>
+          <div><span class="hud-label">최고</span><b id="finalBest">0</b></div>
+        </div>
+        <button id="retryBtn" class="btn" type="button">다시하기</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="game.js"></script>
+</body>
+</html>

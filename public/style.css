@@ -1,0 +1,229 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden;
+  background: #2b2140;
+  font-family: "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  color: #4a3b52;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 게임 영역: 4:7 비율을 유지하면서 화면에 맞춤 */
+#game {
+  position: relative;
+  height: min(100vh, calc(100vw * 7 / 4));
+  height: min(100dvh, calc(100vw * 7 / 4));
+  aspect-ratio: 4 / 7;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+@media (min-width: 500px) {
+  #game {
+    border-radius: 18px;
+    height: min(94vh, 820px);
+  }
+}
+
+#canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* 상단 점수판 */
+#hud {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hud-box {
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 12px;
+  padding: 6px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 64px;
+  backdrop-filter: blur(4px);
+}
+
+.hud-label {
+  font-size: 11px;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+#score,
+#best {
+  font-size: 22px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+#muteBtn {
+  margin-left: auto;
+  pointer-events: auto;
+  border: none;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* 시작 / 게임 오버 화면 */
+.overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(60, 40, 70, 0.35);
+  animation: fadeIn 0.3s ease;
+}
+
+.overlay.hidden,
+.hidden {
+  display: none;
+}
+
+.panel {
+  background: #fffaf3;
+  border-radius: 24px;
+  padding: 28px 24px;
+  width: 82%;
+  text-align: center;
+  box-shadow: 0 8px 0 #f0c9d4, 0 16px 30px rgba(0, 0, 0, 0.2);
+  animation: pop 0.35s cubic-bezier(0.2, 1.6, 0.5, 1);
+}
+
+.emoji {
+  font-size: 52px;
+  line-height: 1;
+  margin-bottom: 6px;
+}
+
+h1,
+h2 {
+  font-size: 28px;
+  font-weight: 900;
+  color: #e8506e;
+  margin-bottom: 10px;
+}
+
+.panel p {
+  font-size: 15px;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.howto {
+  list-style: none;
+  font-size: 13px;
+  line-height: 1.9;
+  background: #fff0f4;
+  border-radius: 12px;
+  padding: 8px 10px;
+  margin-bottom: 18px;
+}
+
+.btn {
+  border: none;
+  background: #e8506e;
+  color: white;
+  font-size: 18px;
+  font-weight: 800;
+  padding: 12px 36px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #b83652;
+  font-family: inherit;
+}
+
+.btn:active {
+  transform: translateY(3px);
+  box-shadow: 0 2px 0 #b83652;
+}
+
+.badge {
+  display: inline-block;
+  background: #ffd84d;
+  color: #7a5200;
+  font-weight: 800;
+  padding: 4px 14px;
+  border-radius: 999px;
+  margin-bottom: 10px;
+  animation: wiggle 0.8s ease infinite;
+}
+
+.badge.hidden {
+  display: none;
+}
+
+.result {
+  display: flex;
+  justify-content: space-around;
+  margin: 8px 0 20px;
+}
+
+.result > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.result b {
+  font-size: 26px;
+  font-weight: 900;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pop {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-3deg); }
+  50% { transform: rotate(3deg); }
+}
+
+/* 게임 오버 창은 위쪽에 띄워서 완성된 케이크가 아래에 보이도록 */
+#over {
+  align-items: flex-start;
+  padding-top: 13%;
+  background: rgba(60, 40, 70, 0.15);
+}
+#over .panel {
+  padding: 18px 20px;
+}
+#over .emoji {
+  font-size: 36px;
+}
